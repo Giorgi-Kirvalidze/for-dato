@@ -1,0 +1,6 @@
+node_modules
+package-lock.json
+src/environment/*.env
+!src/environment/example.env
+.idea/
+build

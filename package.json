@@ -1,0 +1,32 @@
+{
+  "name": "data-module",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "db-crx": "npm run start:dev --prefix db-ctx",
+    "parser": "npm run start:dev --prefix parser",
+    "server": "npm run start:dev --prefix server",
+    "dev": "concurrently \"npm run db-crx\" \"npm run parser\" \"npm run server\"",
+    "lint": "eslint  \"**/*.ts\"",
+    "format": "eslint  \"**/*.ts\" --fix",
+    "pretty": "prettier --write \"**/*.ts\"",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gt.onbrane.com:ukko/data-module.git"
+  },
+  "keywords": [],
+  "author": "Giorgi Kirvalidze",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "concurrently": "^7.6.0",
+    "eslint": "^8.33.0",
+    "husky": "^8.0.0",
+    "prettier": "^2.8.3",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  api:
+    container_name: data_module_api
+    restart: always
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+      # Only build development stage from dockerfile
+      target: development
+    env_file: ./server/src/environment/docker-dev.env
+    ports:
+      - "8080:8080"
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+    # Mount our host dir to the docker container
+    # Mount api dir to docker container 'usr/src/app'
+    # Reflect file changes from host to container
+    volumes:
+      - ./server:/usr/src/app
+      - ./server/node_modules:/usr/src/app/node_modules
+    networks:
+      - data-module-network
+    # RUN in dev-mode: npm run start:dev
+    command: npm run start:dev
+
+  mongodb:
+    container_name: data_module_mongodb
+    image: mongo
+    volumes:
+      - data:/data/db
+    restart: unless-stopped
+    ports:
+      - '27018:27017'
+    networks:
+      - data-module-network
+
+networks:
+  data-module-network:
+    driver: bridge
+
+volumes:
+  data:
